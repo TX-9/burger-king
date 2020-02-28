@@ -93,6 +93,7 @@ class BurgerKing extends Component {
                 <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
                     <OrderSummary
                         purchaseCanceled={this.purchaseCancelHandler}
+                        price={this.state.totalPrice}
                         purchaseContinue={this.purchaseContinueHandler}
                         ingredients={this.state.ingredients}/>
                 </Modal>
