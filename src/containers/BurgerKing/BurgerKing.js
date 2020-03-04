@@ -11,13 +11,9 @@ import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import * as actionTypes from '../../store/actions';
 
 class BurgerKing extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {...}
-    // }
 
+    // UI state
     state = {
-        purchasable: false,
         purchasing: false,
         loading: false,
         error: false
@@ -45,7 +41,7 @@ class BurgerKing extends Component {
             .reduce((sum, el) => {
                 return sum + el;
             }, 0);
-        this.setState({purchasable: sum >= 1})
+        return sum > 0;
     }
 
     purchaseCancelHandler = () => {
@@ -88,8 +84,8 @@ class BurgerKing extends Component {
                         ingredientAdded={this.props.onIngredientAdded}
                         ingredientRemoved={this.props.onIngredientRemoved}
                         disabled={disabled}
-                        purchasable={this.state.purchasable}
-                        price={this.props.totalPrice}
+                        purchasable={this.updatePurchaseState(this.props.ings)}
+                        price={this.props.price}
                         ordered={this.purchasingHandler}
                     />
                 </Aux>
