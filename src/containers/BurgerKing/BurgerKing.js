@@ -19,13 +19,13 @@ class BurgerKing extends Component {
     }
 
     componentDidMount() {
-        // axios.get('/ingredients.json')
-        //     .then(res => {
-        //         this.setState({ingredients: res.data});
-        //     })
-        //     .catch(error => {
-        //         this.setState({error:true});
-        //     })
+        axios.get('/ingredients.json')
+            .then(res => {
+                this.setState({ingredients: res.data});
+            })
+            .catch(error => {
+                this.setState({error:true});
+            })
     }
 
     purchasingHandler = () => {
