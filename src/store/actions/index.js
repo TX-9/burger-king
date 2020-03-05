@@ -1,5 +1,6 @@
 export {
     addIngredient,
-    removeIngredient
+    removeIngredient,
+    initIngredient
 } from './burgerKing';
 export {} from './order';

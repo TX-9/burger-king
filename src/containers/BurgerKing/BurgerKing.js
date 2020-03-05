@@ -13,19 +13,11 @@ class BurgerKing extends Component {
 
     // UI state
     state = {
-        purchasing: false,
-        loading: false,
-        error: false
+        purchasing: false
     }
 
     componentDidMount() {
-        axios.get('/ingredients.json')
-            .then(res => {
-                this.setState({ingredients: res.data});
-            })
-            .catch(error => {
-                this.setState({error:true});
-            })
+        this.props.onInitIngredients();
     }
 
     purchasingHandler = () => {
@@ -59,7 +51,7 @@ class BurgerKing extends Component {
             disabledInfo[key] = disabledInfo[key] <= 0
         }
         let orderSummary = null;
-        let burger = this.state.error ? <p>Ingredients can't be loaded!</p> : <Spinner />;
+        let burger = this.props.error ? <p>Ingredients can't be loaded!</p> : <Spinner />;
 
         if ( this.props.ings ) {
             burger = (
@@ -80,9 +72,6 @@ class BurgerKing extends Component {
                 purchaseCancelled={this.purchaseCancelHandler}
                 purchaseContinued={this.purchaseContinueHandler} />;
         }
-        if ( this.state.loading ) {
-            orderSummary = <Spinner />;
-        }
 
         return (
             <Aux>
@@ -98,13 +87,15 @@ class BurgerKing extends Component {
 const mapStateToProps = state => {
     return {
         ings: state.ingredients,
-        price: state.totalPrice
+        price: state.totalPrice,
+        error: state.error
     };
 }
 const mapDispatchToProps = dispatch => {
     return {
         onIngredientAdded: (ingName) => dispatch(burgerKingActions.addIngredient(ingName)),
-        onIngredientRemoved: (ingName) => dispatch(burgerKingActions.removeIngredient(ingName))
+        onIngredientRemoved: (ingName) => dispatch(burgerKingActions.removeIngredient(ingName)),
+        onInitIngredients: () => dispatch(burgerKingActions.initIngredient())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(BurgerKing, axios));
