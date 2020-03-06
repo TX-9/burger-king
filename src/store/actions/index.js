@@ -3,4 +3,8 @@ export {
     removeIngredient,
     initIngredient
 } from './burgerKing';
-export {} from './order';
+export {
+    purchaseBurgerStart,
+    purchaseInit,
+    fetchOrders
+} from './order';
