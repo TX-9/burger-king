@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionsTypes';
-
+import { updatedObject } from '../Utility';
 const initialState = {
     orders: [],
     loading: false,
@@ -9,47 +9,24 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.PURCHASE_INIT:
-            return {
-                ...state,
-                purchased: false
-            }
+            return updatedObject(state, {purchased: false});
         case actionTypes.PURCHASE_BURGER_START:
-            return {
-                ...state,
-                loading: true
-            }
+            return updatedObject(state, {loading: true});
         case actionTypes.PURCHASE_BURGER_SUCCESS:
-            const newOrder = {
-                ...action.orderData,
-                id: action.orderId
-            }
-            return {
-                ...state,
+            const newOrder = updatedObject(action.orderData, {id: action.orderId});
+            return updatedObject(state, {
                 loading: false,
                 purchased: true,
                 orders: state.orders.concat()
-            };
+            });
         case actionTypes.PURCHASE_BURGER_FAIL:
-            return {
-                ...state,
-                loading: false
-            };
+            return updatedObject(state, {loading: false});
         case actionTypes.FETCH_ORDERS_START:
-            return {
-                ...state,
-                loading: true
-            };
+            return updatedObject(state, {loading: true});
         case actionTypes.FETCH_ORDERS_SUCCESS:
-            return {
-                ...state,
-                orders: action.orders,
-                loading: false
-            };
+            return updatedObject(state, {orders: action.orders, loading: false});
         case actionTypes.FETCH_ORDERS_FAIL:
-            return {
-                ...state,
-                loading: false
-            };
+            return updatedObject(state, {loading: false});
         default:
             return state;
     }
