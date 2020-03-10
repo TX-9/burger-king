@@ -11,13 +11,15 @@ class Checkout extends Component {
         this.props.history.goBack();
     }
     checkoutContinuedHandler = () => {
+        console.log('checkoutContinuedHandler');
         this.props.history.replace('/checkout/contact-data');
     }
-    render() {
-        const summary = <Redirect to="/"/>;
-        if (this.props.ings) {
+
+    render () {
+        let summary = <Redirect to="/" />
+        if ( this.props.ings ) {
             const purchasedRedirect = this.props.purchased ? <Redirect to="/"/> : null;
-            summary(
+            summary = (
                 <div>
                     {purchasedRedirect}
                     <CheckoutSummary
@@ -28,7 +30,7 @@ class Checkout extends Component {
                         path={this.props.match.path + '/contact-data'}
                         component={ContactData}/>
                 </div>
-            )
+            );
         }
         return summary;
     }
@@ -36,7 +38,7 @@ class Checkout extends Component {
 
 const mapStateToProps = state => {
     return {
-        ings: state.ingredients,
+        ings: state.burgerKing.ingredients,
         purchased: state.order.purchased
     }
 };

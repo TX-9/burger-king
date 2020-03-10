@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { connecct } from 'react-redux';
+import { connect } from 'react-redux';
 import Order from '../../components/Order/Order'
 import axios from '../../axios-orders';
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
@@ -20,7 +20,7 @@ class Orders extends Component {
                    ingredients={o.ingredients}
                    price={o.price}
                />
-           ));
+           ))
         }
         return (
             <div>
@@ -43,4 +43,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connecct(mapStateToProps, mapDispatchToProps)(withErrorHandler(Orders, axios));
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Orders, axios));

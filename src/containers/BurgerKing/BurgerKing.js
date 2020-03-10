@@ -20,8 +20,8 @@ class BurgerKing extends Component {
         this.props.onInitIngredients();
     }
 
-    purchasingHandler = () => {
-        this.setState({purchasing: true});
+    purchaseHandler = () => {
+        this.setState( { purchasing: true } );
     }
 
     updatePurchaseState(ingredients) {

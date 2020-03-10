@@ -1,27 +1,28 @@
-import * as actionTypes from '../actions/actionsTypes';
+import * as actionTypes from './actionTypes';
 import axios from '../../axios-orders';
 
-export const purchaseBurgerSuccess = (id, orderData) => {
+export const purchaseBurgerSuccess = ( id, orderData ) => {
     return {
         type: actionTypes.PURCHASE_BURGER_SUCCESS,
         orderId: id,
         orderData: orderData
-    }
+    };
 };
 
 export const purchaseBurgerFail = (error) => {
     return {
-        type: actionTypes.FETCH_INGREDIENT_FAILED,
-        error:error
-    }
-};
+        type: actionTypes.PURCHASE_BURGER_FAIL,
+        error: error
+    };
+}
 
 export const purchaseBurgerStart = () => {
     return {
         type: actionTypes.PURCHASE_BURGER_START
     };
-}
-export const purchaseBurger = (orderData) => {
+};
+
+export const purchaseBurger = ( orderData ) => {
     return dispatch => {
         dispatch(purchaseBurgerStart());
         axios.post( '/orders.json', orderData )
@@ -66,16 +67,16 @@ export const fetchOrders = () => {
         axios.get('/orders.json')
             .then(res => {
                 const fetchedOrders = [];
-                for (let k in res.data) {
-                    fetchedOrders.push({
-                        ...res.data[k],
-                        id: k
-                    });
+                for ( let key in res.data ) {
+                    fetchedOrders.push( {
+                        ...res.data[key],
+                        id: key
+                    } );
                 }
                 dispatch(fetchOrdersSuccess(fetchedOrders));
-            })
-            .catch(err => {
+            } )
+            .catch( err => {
                 dispatch(fetchOrdersFail(err));
-            })
+            } );
     };
 };
