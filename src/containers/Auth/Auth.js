@@ -36,7 +36,7 @@ class Auth extends Component {
             }
         }
     }
-    CheckValidity(value, rules) {
+    checkValidity(value, rules) {
         let isValid = true;
         if (!rules) {
             return true;
